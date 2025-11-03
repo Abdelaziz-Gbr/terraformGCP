@@ -3,12 +3,12 @@ variable "project_id" {
     description = "The ID of the GCP project to deploy resources into."
 }
 
-variable "default_region" {
+variable "region" {
     type        = string
-    description = "The default region for GCP resources."
+    description = "The region for GCP resources."
 }
 
-variable "default_zone" {
+variable "zone" {
     type        = string
-    description = "The default zone for GCP resources."
+    description = "The zone for GCP resources."
 }
