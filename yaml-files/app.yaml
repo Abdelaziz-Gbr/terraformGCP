@@ -47,11 +47,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: devops-demo-service
+  name: app-service
 spec:
   type: LoadBalancer
   selector:
-    app: devops-demo
+    app: tornado-app
   ports:
   - port: 80
     targetPort: 8000
