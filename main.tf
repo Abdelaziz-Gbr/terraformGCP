@@ -1,21 +1,39 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "7.9.0"
-    }
-  }
-}
-
-provider "google" {
-  project = var.project_id
-  region  = var.default_region
-  zone    = var.default_zone
-}
-
 module "my_network" {
   source          = "./network"
   project_id      = var.project_id
-  default_region  = var.default_region
-  default_zone    = var.default_zone
+  region          = var.default_region
+  zone            = var.default_zone
+}
+
+module "gke_cluster" {
+  source     = "./GKE"
+  project_id = var.project_id
+  region     = var.default_region
+  network    = module.my_network.network_full_name
+  subnetwork = module.my_network.restricted_subnet
+}
+
+module "artifact_registry" {
+  source      = "./docker-artifact-registry"
+  project_id  = var.project_id
+  region      = var.default_region
+  repo_id     = "abdelaziz-gbr"
+  description = "Docker Artifact Registry"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+resource "kubernetes_namespace" "demo" {
+  metadata {
+    name = "demo"
+  }
 }

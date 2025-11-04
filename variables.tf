@@ -12,3 +12,9 @@ variable "default_zone" {
     type        = string
     description = "The default zone for GCP resources."
 }
+
+variable "private_subnet_name" {
+    type        = string
+    description = "The name of the private subnet."
+    default     = "restricted-subnet"
+}
