@@ -1,3 +1,5 @@
 project_id = "iti-project-477114"
 default_region = "us-central1"
 default_zone = "us-central1-c"
+management_cidr = "10.10.0.0/24"
+restricted_cidr = "10.10.1.0/24"

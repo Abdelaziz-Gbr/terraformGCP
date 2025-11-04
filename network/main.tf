@@ -7,14 +7,14 @@ resource "google_compute_subnetwork" "management-subnet" {
   name          = "management-subnet"
   region        = var.region
   network       = google_compute_network.vpc.self_link
-  ip_cidr_range = "10.10.0.0/24"
+  ip_cidr_range = var.management_cidr
 }
 
 resource "google_compute_subnetwork" "restricted-subnet" {
   name          = "restricted-subnet"
   region        = var.region
   network       = google_compute_network.vpc.self_link
-  ip_cidr_range = "10.10.1.0/24"
+  ip_cidr_range = var.restricted_cidr
 
   secondary_ip_range {
     range_name    = "pods"

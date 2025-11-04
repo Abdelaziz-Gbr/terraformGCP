@@ -18,3 +18,13 @@ variable "private_subnet_name" {
     description = "The name of the private subnet."
     default     = "restricted-subnet"
 }
+
+variable "management_cidr" {
+  type        = string
+  description = "The CIDR block for management network allowed to access GKE master."
+}
+
+variable "restricted_cidr" {
+  type        = string
+  description = "The CIDR block for restricted network allowed to access GKE master."
+}

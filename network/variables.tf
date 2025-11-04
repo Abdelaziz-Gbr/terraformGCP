@@ -12,3 +12,13 @@ variable "zone" {
     type        = string
     description = "The zone for GCP resources."
 }
+
+variable "management_cidr" {
+  type        = string
+  description = "The CIDR block for management network allowed to access GKE master."
+}
+
+variable "restricted_cidr" {
+  type        = string
+  description = "The CIDR block for restricted network allowed to access GKE master."
+}
