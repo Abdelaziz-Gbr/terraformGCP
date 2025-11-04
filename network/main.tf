@@ -8,6 +8,8 @@ resource "google_compute_subnetwork" "management-subnet" {
   region        = var.region
   network       = google_compute_network.vpc.self_link
   ip_cidr_range = var.management_cidr
+  
+  private_ip_google_access = true
 }
 
 resource "google_compute_subnetwork" "restricted-subnet" {
@@ -28,6 +30,7 @@ resource "google_compute_subnetwork" "restricted-subnet" {
 
   private_ip_google_access = true
 }
+
 resource "google_compute_router" "nat_router" {
   name    = "nat-router"
   region  = var.region
@@ -44,6 +47,11 @@ resource "google_compute_router_nat" "nat_config" {
 
   subnetwork {
     name                    = google_compute_subnetwork.restricted-subnet.self_link
+    source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
+  }
+
+  subnetwork {
+    name                    = google_compute_subnetwork.management-subnet.self_link
     source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
   }
 
